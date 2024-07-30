@@ -5,18 +5,24 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Deploy to server
-        run: |
-          ssh root@192.168.1.110 '
-            cd /var/www/html
-            git pull origin main
-            sudo systemctl restart apache2
-          '
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up SSH
+      uses: actions/setup-ssh@v4
+      with:
+        host: 192.168.1.110
+        username: root
+        port: 22
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to server
+      run: |
+        ssh root@192.168.1.110 '
+          cd /var/www/html
+          git pull origin main
+          sudo systemctl restart apache2
+        '
