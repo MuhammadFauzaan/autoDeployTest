@@ -11,8 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up SSH
-      uses: MuhammadFauzaan/autoDeployTest@main
+    #- name: Set up SSH
+      #uses: MuhammadFauzaan/autoDeployTest@main
       with:
         host: 192.168.1.110
         username: root
