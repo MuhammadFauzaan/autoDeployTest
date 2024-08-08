@@ -3,7 +3,8 @@ name: Deploy to Apache Server
 on:
   push:
     branches: [ main ]
-  pull_request: [ main ]
+  pull_request: 
+    branches: [ main ]
 
 jobs:
   build:
