@@ -15,11 +15,11 @@ jobs:
     - name: Set up SSH
       uses: Tofandel/ssh-server-action@v1.0.0
       with:
-        host: 192.168.1.110
-        username: root
-        password: ${{ secrets.PASS_KEY }}
+        hostname: 192.168.1.110
+        user_name: root
+        user_password: ${{ secrets.PASS_KEY }}
         port: 22
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        public_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Deploy to server
       run: |
