@@ -21,6 +21,7 @@ jobs:
         FOLDER: "src/var/www/html"
         SERVER_IP: 192.168.1.110
         USERNAME: root
+        SERVER_DESTINATION: 192.168.1.110
         #SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
       #command: |
         #ssh root@192.168.1.110
