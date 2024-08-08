@@ -12,19 +12,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up SSH
-      uses: Tofandel/ssh-server-action@v1.0.0
+    - name: Run remote command via SSH
+      uses: D3rHase/ssh-command-action@latest
       with:
-        hostname: 192.168.1.110
-        user_name: root
-        user_password: ${{ secrets.PASS_KEY }}
+        host: 192.168.1.110
         port: 22
-        public_key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Deploy to server
-      run: |
-        ssh root@192.168.1.110 '
+        user: root
+        private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        command: |
+          ssh root@192.168.1.110
           cd /var/www/html
           git pull origin main
           systemctl restart apache2
-        '
