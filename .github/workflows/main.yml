@@ -3,19 +3,20 @@ name: Deploy to Apache Server
 on:
   push:
     branches: [ main ]
+  pull_request: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
 
-    #- name: Set up SSH
-      #uses: MuhammadFauzaan/autoDeployTest@main
+    - name: Set up SSH
+      uses: Tofandel/ssh-server-action@v1.0.0
       with:
         host: 192.168.1.110
         username: root
+        password: ${{ secrets.PASS_KEY }}
         port: 22
         key: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -24,5 +25,5 @@ jobs:
         ssh root@192.168.1.110 '
           cd /var/www/html
           git pull origin main
-          sudo systemctl restart apache2
+          systemctl restart apache2
         '
